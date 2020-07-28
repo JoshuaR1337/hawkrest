@@ -30,7 +30,7 @@ class HawkResponseMiddleware(middleware_cls):
             # Sign our response, so clients can trust us.
             log.debug('Hawk signing the response')
             receiver.respond(content=response.content,
-                             content_type=response['Content-Type'])
+                             content_type=response.get('Content-Type',None))
             response['Server-Authorization'] = receiver.response_header
         else:
             log.debug('NOT Hawk signing the response, not a Hawk request')
